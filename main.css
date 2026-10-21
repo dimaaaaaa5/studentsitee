@@ -1,0 +1,335 @@
+/* =====================================================
+   LP Community: головна сторінка
+   Розміри блоків і шрифтів рахуються від розміру вікна,
+   тому сторінка вміщається на екран без прокручування.
+   ===================================================== */
+
+/* ---------- 1. Кольори й розміри (змінюєте тут, і міняється всюди) ---------- */
+:root {
+  --bg:        #0a0f24;  /* фон сторінки */
+  --panel:     #0f1737;  /* бічні колонки */
+  --card:      #121a3a;  /* блоки */
+  --border:    #243066;  /* рамки */
+  --btn:       #1a2350;  /* квадратні кнопки */
+  --accent:    #3b55e6;  /* синій: наведення на меню, вибраний день */
+  --text:      #eef1ff;  /* основний текст */
+  --muted:     #9aa8d6;  /* другорядний текст */
+  --yellow:    #ffd23f;  /* дні з подіями */
+
+  --radius:    18px;     /* заокруглення блоків */
+  --gap:       14px;     /* відстань між блоками */
+  --topbar-h:  64px;     /* висота верхньої стрічки */
+}
+
+/* ---------- 2. Скидання стандартних відступів ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;               /* рівно на висоту екрана */
+  overflow: hidden;            /* без прокручування */
+  display: flex;
+  flex-direction: column;      /* зверху стрічка, нижче основна частина */
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Onest', Arial, sans-serif;
+  font-size: clamp(12px, 1.9vh, 17px);  /* шрифт росте/зменшується разом з висотою екрана */
+  line-height: 1.25;
+}
+
+/* ---------- 3. Загальний вигляд блока ---------- */
+.card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.card__title {
+  font-size: 1.4em;
+  font-weight: 800;
+}
+
+/* ---------- 4. Верхня стрічка ---------- */
+.topbar {
+  flex: 0 0 var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: var(--card);
+  border-bottom: 2px solid var(--border);
+}
+
+.topbar__name { font-size: 1.3em; font-weight: 800; }
+.topbar__sub  { color: var(--muted); }
+
+.topbar__actions { display: flex; gap: 10px; }
+
+.square-btn {
+  width: calc(var(--topbar-h) - 20px);
+  height: calc(var(--topbar-h) - 20px);
+  display: grid;
+  place-items: center;
+  background: var(--btn);
+  color: var(--muted);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+/* ---------- 5. Розкладка: ліва колонка | центр | права колонка ---------- */
+.layout {
+  flex: 1;
+  min-height: 0;     /* дозволяє колонкам стискатися, а не розпирати сторінку */
+  display: grid;
+  grid-template-columns: clamp(190px, 14vw, 250px) 1fr clamp(260px, 21vw, 340px);
+}
+
+/* ---------- 6. Ліва колонка і меню ---------- */
+.sidebar {
+  display: flex;
+  min-height: 0;
+  padding: 12px;
+  background: var(--panel);
+}
+
+.menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  overflow: auto;
+}
+
+/* Пункти меню: спочатку зливаються з кольором меню (прозорі) */
+.menu__item {
+  display: block;
+  padding: 0.65em 0.9em;
+  border-radius: 10px;
+  color: #b8c3ee;
+  font-size: 1.05em;
+  font-weight: 500;
+  text-decoration: none;
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+}
+
+/* При наведенні мишки (і для активного пункту) стають синіми */
+.menu__item:hover,
+.menu__item--active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ---------- 7. Центральна частина ---------- */
+.content {
+  min-height: 0;
+  padding: var(--gap);
+  display: grid;
+  grid-template-rows: 1.1fr 1.1fr 1.5fr;  /* банер : плитки : нижні блоки */
+  gap: var(--gap);
+}
+
+/* Банер. Щоб додати фото, замініть background на:
+   background: url("photo.jpg") center / cover;  */
+.banner {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4em;
+  padding: 0 2em;
+  border-radius: var(--radius);
+  background: linear-gradient(100deg, var(--card) 45%, #2b2f7a 100%);
+  overflow: hidden;
+}
+
+.banner__title { font-size: 2em; font-weight: 800; }
+.banner__text  { max-width: 28em; color: #c9d2f5; }
+
+/* Чотири плитки */
+.tiles {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.tile {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  padding: 1em;
+  overflow: hidden;
+}
+
+.tile__icon {
+  width: 2.4em;
+  height: 2.4em;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+}
+.tile:nth-child(1) .tile__icon { background: #3b4dd8; }
+.tile:nth-child(2) .tile__icon { background: #6d28d9; }
+.tile:nth-child(3) .tile__icon { background: #15803d; }
+.tile:nth-child(4) .tile__icon { background: #b45309; }
+
+.tile__title { font-size: 1.2em; font-weight: 800; }
+.tile__text  { color: var(--muted); }
+
+/* Два нижні блоки поруч */
+.lists {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.list {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  padding: 1em 1.2em;
+  overflow: hidden;
+}
+
+/* Рядок зі кольоровою смужкою зліва */
+.row {
+  padding: 0.15em 0 0.15em 0.8em;
+  border-left: 4px solid var(--accent);
+}
+.row--blue   { border-color: #3b55e6; }
+.row--purple { border-color: #8b5cf6; }
+.row--green  { border-color: #22c55e; }
+.row--orange { border-color: #f59e0b; }
+
+.row__title { font-size: 1.05em; font-weight: 700; }
+.row__meta  { color: var(--muted); }
+
+/* ---------- 8. Права колонка ---------- */
+.rightbar {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background: var(--panel);
+}
+
+.profile {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.8em 1em;
+}
+
+.avatar {
+  width: 3em;
+  height: 3em;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #7c3aed;
+  font-weight: 700;
+}
+
+.profile__name { font-weight: 700; font-size: 1.1em; }
+.profile__sub  { color: var(--muted); }
+
+.topics {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  padding: 0.9em 1.1em;
+}
+
+.topic { display: flex; justify-content: space-between; font-weight: 600; }
+.topic__count { color: #7c93ff; }
+
+.calendar {
+  flex: 1 1 auto;               /* календар займає весь вільний простір колонки */
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.9em 1.1em;
+}
+
+.calendar__grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);       /* 7 стовпців: дні тижня */
+  grid-template-rows: auto repeat(4, 1fr);     /* рядок з назвами днів + 4 тижні однакової висоти */
+  gap: 3px;
+  text-align: center;
+}
+
+.weekday { color: var(--muted); }
+
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.day--muted    { color: #7f8fc4; }                                    /* дні наступного місяця */
+.day--selected { background: var(--accent); color: #fff; font-weight: 700; }
+.day--event    { background: var(--yellow); color: #1b1b3a; font-weight: 700; }
+
+.calendar__note { color: var(--muted); }
+.accent { color: #7c93ff; font-weight: 700; }
+
+.feedback {
+  flex: 0 0 auto;               /* блок не розтягується, а займає стільки, скільки треба */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.9em 1.1em;
+}
+
+.feedback__input {
+  flex: none;
+  height: 3.4em;                /* невисоке поле; змінюйте це число, щоб зробити більшим чи меншим */
+  padding: 0.6em 0.8em;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  resize: none;
+}
+
+.feedback__btn {
+  padding: 0.6em;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.feedback__btn:hover { filter: brightness(1.15); }
+/* ---------- 9. Вузькі екрани (телефон/планшет): колонки одна під одною ---------- */
+@media (max-width: 1000px) {
+  body { height: auto; overflow: auto; }
+  .layout { grid-template-columns: 1fr; }
+  .content { grid-template-rows: auto; }
+  .banner { padding: 1.5em 2em; }
+  .tiles { grid-template-columns: repeat(2, 1fr); }
+  .lists { grid-template-columns: 1fr; }
+}

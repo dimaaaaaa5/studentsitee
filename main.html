@@ -1,12 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LP Community</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    
+
+  <header class="topbar">
+    <div class="topbar__brand">
+      <div class="topbar__name">LP Community</div>
+      <div class="topbar__sub">Львівська Політехніка</div>
+    </div>
+    <div class="topbar__actions">
+      <button class="square-btn" type="button" aria-label="Сповіщення">🔔</button>
+      <button class="square-btn" type="button" aria-label="Яскравість">☀</button>
+      <button class="square-btn" type="button" aria-label="Налаштування">⚙</button>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <nav class="menu card" aria-label="Основне меню">
+        <a class="menu__item menu__item--active" href="#">Головна</a>
+        <a class="menu__item" href="#">Оголошення</a>
+        <a class="menu__item" href="#">Повідомлення</a>
+        <a class="menu__item" href="#">Навчання</a>
+        <a class="menu__item" href="#">Проєкти</a>
+        <a class="menu__item" href="#">Спільноти</a>
+        <a class="menu__item" href="#">Події</a>
+        <a class="menu__item" href="#">Ринок</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+
+      <section class="banner">
+        <h1 class="banner__title">Привіт, Дмитре!</h1>
+        <p class="banner__text">Твій простір у Політехніці. Знаходь можливості та будь частиною спільноти.</p>
+      </section>
+
+      <section class="tiles">
+        <article class="tile card">
+          <div class="tile__icon">С</div>
+          <h3 class="tile__title">Спільноти</h3>
+          <p class="tile__text">Однодумці за інтересами</p>
+        </article>
+        <article class="tile card">
+          <div class="tile__icon">П</div>
+          <h3 class="tile__title">Проєкти</h3>
+          <p class="tile__text">IT-проєкти та стажування</p>
+        </article>
+        <article class="tile card">
+          <div class="tile__icon">Б</div>
+          <h3 class="tile__title">Бібліотека</h3>
+          <p class="tile__text">Підручники та методички</p>
+        </article>
+        <article class="tile card">
+          <div class="tile__icon">Д</div>
+          <h3 class="tile__title">Події</h3>
+          <p class="tile__text">Лекції та воркшопи</p>
+        </article>
+      </section>
+
+      <section class="lists">
+        <div class="list card">
+          <h2 class="card__title">Оголошення</h2>
+          <div class="row row--blue">
+            <div class="row__title">Підручники ФЕМ у бібліотеці</div>
+            <div class="row__meta">14 жовт. · 12,4k переглядів</div>
+          </div>
+          <div class="row row--purple">
+            <div class="row__title">Стипендії та гранти</div>
+            <div class="row__meta">13 жовт. · 2,1k переглядів</div>
+          </div>
+          <div class="row row--green">
+            <div class="row__title">Хакатон від SoftServe</div>
+            <div class="row__meta">12 жовт. · 356 переглядів</div>
+          </div>
+        </div>
+
+        <div class="list card">
+          <h2 class="card__title">Популярні спільноти</h2>
+          <div class="row row--blue">
+            <div class="row__title">Internet of Things (IoT)</div>
+            <div class="row__meta">1,2k учасників · Проєкти</div>
+          </div>
+          <div class="row row--orange">
+            <div class="row__title">Програмування (Python)</div>
+            <div class="row__meta">980 учасників · Код і задачі</div>
+          </div>
+          <div class="row row--green">
+            <div class="row__title">Футбол | ЛП</div>
+            <div class="row__meta">742 учасники · Матчі</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="rightbar">
+
+      <section class="profile card">
+        <div class="avatar">ДА</div>
+        <div>
+          <div class="profile__name">Дмитро Андрушков</div>
+          <div class="profile__sub">1 курс, Системна інженерія</div>
+        </div>
+      </section>
+
+      <section class="topics card">
+        <h2 class="card__title">Популярні теми</h2>
+        <div class="topic"><span>Робота та стажування</span><span class="topic__count">124</span></div>
+        <div class="topic"><span>IT-проєкти</span><span class="topic__count">98</span></div>
+        <div class="topic"><span>Продаж / купівля</span><span class="topic__count">76</span></div>
+      </section>
+
+                        <section class="calendar card">
+        <h2 class="card__title">Жовтень 2026</h2>
+        <div class="calendar__grid">
+          <span class="weekday">Пн</span><span class="weekday">Вт</span><span class="weekday">Ср</span>
+          <span class="weekday">Чт</span><span class="weekday">Пт</span><span class="weekday">Сб</span><span class="weekday">Нд</span>
+
+          <span class="day">12</span><span class="day">13</span><span class="day">14</span>
+          <span class="day day--selected">15</span><span class="day">16</span><span class="day">17</span>
+          <span class="day day--event">18</span>
+
+          <span class="day">19</span><span class="day">20</span><span class="day">21</span>
+          <span class="day day--event">22</span><span class="day">23</span><span class="day">24</span>
+          <span class="day day--event">25</span>
+
+          <span class="day">26</span><span class="day">27</span><span class="day">28</span>
+          <span class="day">29</span><span class="day">30</span><span class="day">31</span>
+          <span class="day day--muted">1</span>
+
+          <span class="day day--muted">2</span><span class="day day--muted">3</span><span class="day day--muted">4</span>
+          <span class="day day--muted">5</span><span class="day day--muted">6</span><span class="day day--muted">7</span>
+          <span class="day day--muted">8</span>
+        </div>
+        <p class="calendar__note"><span class="accent">18:00</span> Футбольний матч</p>
+      </section>
+      <section class="feedback card">
+        <h2 class="card__title">Відгуки та ідеї</h2>
+        <textarea class="feedback__input" placeholder="Напишіть вашу ідею…"></textarea>
+        <button class="feedback__btn" type="button">Надіслати</button>
+      </section>
+
+    </aside>
+  </div>
+
 </body>
 </html>
